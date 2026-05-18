@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+
+  <style>
+
+    body{
+      font-family: Arial;
+      background:
+        linear-gradient(rgba(15,23,42,0.85),
+        rgba(15,23,42,0.85)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1920&auto=format&fit=crop');
+
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      margin:0;
+    }
+
+    .card{
+      background:rgba(30,41,59,0.75);
+      backdrop-filter:blur(12px);
+
+      border:1px solid rgba(255,255,255,0.1);
+
+      padding:30px;
+      border-radius:20px;
+      width:350px;
+
+      box-shadow:0 0 30px rgba(0,0,0,0.5);
+
+      animation:fade 1s ease;
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:20px;
+      font-size:32px;
+    }
+
+    .mensagem{
+      font-size:14px;
+      line-height:1.5;
+      margin-bottom:15px;
+      color:#cbd5e1;
+      text-align:center;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+
+      border:none;
+      outline:none;
+
+      border-radius:10px;
+
+      box-sizing:border-box;
+
+      font-size:14px;
+
+      background:#0f172a;
+      color:white;
+    }
+
+    textarea{
+      resize:none;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      margin-top:20px;
+
+      border:none;
+      border-radius:10px;
+
+      background:#3b82f6;
+      color:white;
+
+      font-size:16px;
+
+      cursor:pointer;
+
+      transition:0.3s;
+    }
+
+    button:hover{
+      transform:scale(1.02);
+      opacity:0.95;
+    }
+
+    @keyframes fade{
+
+      from{
+        opacity:0;
+        transform:translateY(15px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h1>Quick Email</h1>
+
+    <p class="mensagem">
+      Olá recrutador, Seja bem-vindo ao Quick Email feito por Otávio Félix.
+      Fique à vontade para testar e não se esqueça de conferir seu e-mail!
+    </p>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Digite um ou mais e-mails separados por vírgula.">
+
+    <textarea
+      id="mensagem"
+      rows="5"
+      placeholder="Digite sua mensagem"></textarea>
+
+    <button onclick="enviar()">
+      Enviar
+    </button>
+
+  </div>
+
+  <script>
+
+    function enviar(){
+
+      const email =
+        document.getElementById("email").value;
+
+      const mensagem =
+        document.getElementById("mensagem").value;
+
+      google.script.run
+        .withSuccessHandler(function(resposta){
+
+          alert(resposta);
+
+          document.getElementById("email").value = "";
+          document.getElementById("mensagem").value = "";
+
+        })
+        .enviarContato(email, mensagem);
+
+    }
+
+  </script>
+
+</body>
+
+</html>
